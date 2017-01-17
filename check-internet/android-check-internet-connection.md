@@ -1,3 +1,7 @@
+theme: plain jane, 3
+autoscale: true 
+footer: (c) Diego Freniche / @dfreniche / www.freniche.com
+
 ## Check Network available
 
 > you should not base decisions on whether a network is "available." You should always check isConnected() before performing network operations

@@ -6,6 +6,8 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 
 - [Google Maps](google-maps-v2/google-maps-v2.md)
 - [ADB: Android Debugging Bridge](adb/adb.md)
+- [Check if your Internet connection is alive](check-internet/android-check-internet-connection.md)
+- [Play MIDI files in Android](midi-playing/jet-midi-playing.md)
 
 ## Contributing
 
