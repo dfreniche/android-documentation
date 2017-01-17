@@ -1,3 +1,7 @@
+theme: plain jane, 3
+autoscale: true 
+footer: (c) Diego Freniche / @dfreniche / www.freniche.com
+
 # Android MIDI Paying
 
 > JET is an interactive music player for small embedded devices, including the those running the Android platform
@@ -9,10 +13,13 @@
 
 JetCreator manual: [https://developer.android.com/guide/topics/media/jet/jetcreator_manual.html]()
 
+---
 
 ## Sample files: important to use .jet files
 
 [https://github.com/android/platform_external_sonivox/blob/master/jet_tools/JetCreator_content/JetCreator_demo_1.zip]()
+
+---
 
 ## Sample code
 
@@ -25,6 +32,8 @@ byte segmentId = 0;
 jetPlayer.queueJetSegment(0, -1, 0, 0, 0, (byte) 0);
 jetPlayer.play();
 ```
+
+---
 
 ## Reference:
 
