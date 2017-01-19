@@ -11,13 +11,13 @@ footer: (c) Diego Freniche / @dfreniche / www.freniche.com
 
 
 
-JetCreator manual: [https://developer.android.com/guide/topics/media/jet/jetcreator_manual.html]()
+JetCreator manual: [https://developer.android.com/guide/topics/media/jet/jetcreator_manual.html](https://developer.android.com/guide/topics/media/jet/jetcreator_manual.html)
 
 ---
 
 ## Sample files: important to use .jet files
 
-[https://github.com/android/platform_external_sonivox/blob/master/jet_tools/JetCreator_content/JetCreator_demo_1.zip]()
+[https://github.com/android/platform_external_sonivox/blob/master/jet_tools/JetCreator_content/JetCreator_demo_1.zip](https://github.com/android/platform_external_sonivox/blob/master/jet_tools/JetCreator_content/JetCreator_demo_1.zip)
 
 ---
 
@@ -37,4 +37,4 @@ jetPlayer.play();
 
 ## Reference:
 
-- [http://stackoverflow.com/a/20116393/225503]()
+- [http://stackoverflow.com/a/20116393/225503](http://stackoverflow.com/a/20116393/225503)
