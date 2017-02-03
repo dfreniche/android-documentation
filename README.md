@@ -10,6 +10,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 - [Check if your Internet connection is alive](check-internet/android-check-internet-connection.md)
 - [Play MIDI files in Android](midi-playing/jet-midi-playing.md)
 - [Simple Volley networking & GSON JSON parsing](volley/volley-notes.md)
+- [Menus](menus/menus.md)
 
 ## Contributing
 
