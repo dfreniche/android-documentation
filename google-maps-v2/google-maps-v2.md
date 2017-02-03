@@ -146,3 +146,152 @@ OpenGL ES V2: los mapas requieren OpenGL
     android:layout_height="match_parent"/>
 
 ```
+
+---
+
+## Load Map
+
+```java
+private void initializeMap() {
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                // check if map is created successfully or not
+                if (googleMap == null) {
+                    Toast.makeText(getApplicationContext(),
+                            "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    setupMap(googleMap);
+                }
+            }
+        });
+    }
+
+```
+
+---
+
+
+
+## Center a map in lat, lon
+
+```java
+
+public static void centerMapInPosition(GoogleMap googleMap, double latitude, double longitude) {
+    CameraPosition cameraPosition = new CameraPosition.Builder().target(
+            new LatLng(latitude, longitude)).zoom(12).build();
+    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+}
+
+```
+
+
+---
+
+## Show user position in Map
+
+
+```java
+if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    // TODO: Consider calling
+    //    ActivityCompat#requestPermissions
+    // here to request the missing permissions, and then overriding
+    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+    //                                          int[] grantResults)
+    // to handle the case where the user grants the permission. See the documentation
+    // for ActivityCompat#requestPermissions for more details.
+    return;
+}
+googleMap.setMyLocationEnabled(true);
+googleMap.getUiSettings().setRotateGesturesEnabled(false);
+
+```
+
+---
+
+## Add pins to Map
+
+Define MapPinnable interface
+
+```java 
+
+public interface MapPinnable<E> {
+    float getLatitude();
+    float getLongitude();
+    String getPinDescription();
+    String getPinImageUrl();
+    E getRelatedModelObject();
+}
+
+```
+
+
+---
+
+
+```java 
+
+public class MapPinsAdder {
+    public static void addPins(List<MapPinnable> mapPinnables, final GoogleMap googleMap, final Context context) {
+        if (mapPinnables == null || googleMap == null) {
+            return;
+        }
+
+        for (final MapPinnable pinnable: mapPinnables) {
+            final LatLng position = new LatLng(pinnable.getLatitude(), pinnable.getLongitude());
+            final String profileImageUrl = pinnable.getPinImageUrl();
+
+            final MarkerOptions marker = new MarkerOptions().position(position).title(pinnable.getPinDescription());
+            
+            Marker m = googleMap.addMarker(marker);
+            m.setTag(pinnable);                   
+        }
+    }
+}
+
+
+``` 
+
+
+---
+
+## Add pins to Map
+
+
+```java 
+List<MapPinsAdder.MapPinnable> pins = new LinkedList<>();
+for (Shop shop: shops.getAll()) {
+    MapPinsAdder.MapPinnable pin = shop;
+
+    pins.add(pin);
+}
+
+MapPinsAdder.addPins(pins, googleMap, this);
+
+
+```
+
+---
+
+
+## Detect tap on Pin InfoWindow
+
+```java 
+// ...
+
+    googleMap.setOnInfoWindowClickListener(this);
+
+// ...
+
+@Override
+public void onInfoWindowClick(Marker marker) {
+    if (marker.getTag() != null) {
+        Shop shop = (Shop) marker.getTag();
+
+        Navigator.navigateFromShopsActivityToShopDetailActivity(this, shop);
+    }
+}
+
+```
