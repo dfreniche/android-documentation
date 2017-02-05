@@ -12,6 +12,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 - [Simple Volley networking & GSON JSON parsing](volley/volley-notes.md)
 - [Menus](menus/menus.md)
 - [How to create a Recycler View, ViewHolder & Adapter](recycler-view/recycler-view.md)
+- [Adding custom fonts to your project](fonts/fonts.md)
 
 ## Contributing
 
