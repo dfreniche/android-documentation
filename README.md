@@ -1,6 +1,6 @@
 # My Android notes
 
-Several documents that I maintain for myself. Maybe they can help you too. 
+Several documents that I maintain for myself. I just can't remember how to do the things I want to do. Maybe they can help you too. 
 
 These docs are in Markdown format, prepared to be used with the superb presentation software [Deckset](http://www.decksetapp.com/)
 
@@ -16,7 +16,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 
 ## Contributing
 
-- If you spot an error / typo / something missing, please add an issue.
+- If you spot an error / typo / dead link / something missing, please [file an issue](https://github.com/dfreniche/android-documentation/issues).
 - Pull requests are welcome ;-)
 
 ## LICENSE
