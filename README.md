@@ -13,6 +13,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 - [Menus](menus/menus.md)
 - [How to create a Recycler View, ViewHolder & Adapter](recycler-view/recycler-view.md)
 - [Adding custom fonts to your project](fonts/fonts.md)
+- [Passing data back from one Activity: Open Activity for result](open-activity-forresult/openactivityforresult.md)
 
 ## Contributing
 
