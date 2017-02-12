@@ -110,10 +110,10 @@ OpenGL ES V2: los mapas requieren OpenGL
 
 ```xml 
 <permission
-    android:name="com.freniche.mapexample.permission.MAPS_RECEIVE"
+    android:name="<YOUR-APP-PACKAGE>.permission.MAPS_RECEIVE"
     android:protectionLevel="signature" />
 
-<uses-permission android:name="com.freniche.mapexample.permission.MAPS_RECEIVE" />
+<uses-permission android:name="<YOUR-APP-PACKAGE>.permission.MAPS_RECEIVE" />
 
 
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -136,7 +136,18 @@ OpenGL ES V2: los mapas requieren OpenGL
 
 ## Layout
 
-- Mapfragment
+- Mapfragment (__using__ Support library)
+
+```xml
+<fragment
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+```
+
+- Mapfragment (__not__ using Support library)
 
 ```xml
 <fragment
