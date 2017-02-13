@@ -15,6 +15,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 - [Adding custom fonts to your project](fonts/fonts.md)
 - [Passing data back from one Activity: Open Activity for result](open-activity-forresult/openactivityforresult.md)
 - [Using the Realm database in Android](realm/realm.md)
+- [Intent Services](intent-service/intent-service.md)
 
 ## Contributing
 
