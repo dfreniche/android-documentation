@@ -205,7 +205,8 @@ public static void centerMapInPosition(GoogleMap googleMap, double latitude, dou
 
 
 ```java
-if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+if (ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && 
+    ActivityCompat.checkSelfPermission(getBaseContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
     // TODO: Consider calling
     //    ActivityCompat#requestPermissions
     // here to request the missing permissions, and then overriding
@@ -222,7 +223,24 @@ googleMap.getUiSettings().setRotateGesturesEnabled(false);
 
 ---
 
-## Add pins to Map
+## Markers == pins on the Map
+
+- `addMarker`: receives a MarkerOptions() object, returns the newly added Marker to the map
+
+```java
+@Override
+public void onMapReady(GoogleMap map) {
+    map.addMarker(new MarkerOptions()
+        .position(new LatLng(10, 10))
+        .title("Hello world"));
+}
+```
+
+Marker docs: https://developers.google.com/maps/documentation/android-api/marker
+
+---
+
+## Add pins to Map, reusable way
 
 Define MapPinnable interface
 
