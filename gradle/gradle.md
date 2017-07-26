@@ -193,6 +193,44 @@ task buildscriptDependencies << {
 
 ---
 
+## Dependencies problems
+
+- sometimes the same library is included directly and used by another library
+- to see all dependencies, open Terminal in Android Studio and run:
+
+```
+./gradlew :phototransfer:dependencies
+```
+
+This will output all dependencies. In this example:
+
+```
++--- net.danlew:android.joda:2.9.9
+|    \--- joda-time:joda-time:2.9.9
++--- project :example
+|    +--- com.android.support:appcompat-v7:23.+ -> 24.1.1 (*)
+|    +--- com.google.code.gson:gson:2.4 -> 2.7
+|    +--- com.squareup.retrofit2:retrofit:2.1.0
+|    |    \--- com.squareup.okhttp3:okhttp:3.3.0 -> 3.6.0 (*)
+|    +--- com.squareup.retrofit2:converter-gson:2.1.0
+|    |    +--- com.squareup.retrofit2:retrofit:2.1.0 (*)
+|    |    \--- com.google.code.gson:gson:2.7
+|    \--- com.anjlab.android.iab.v3:library:1.0.+ -> 1.0.41
+|         \--- joda-time:joda-time:2.9.9
+```
+
+- joda-time is included twice: directly and because is a dependency for com.anjlab.android.iab.v3
+
+- fix in Gradle file:
+
+```
+    compile ( "com.anjlab.android.iab.v3:library:1.0.+" ) {
+        exclude module: 'joda-time'
+    }
+```
+
+---
+
 ## Reference
 
 [http://tools.android.com/tech-docs/new-build-system](http://tools.android.com/tech-docs/new-build-system)
