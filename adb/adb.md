@@ -39,9 +39,21 @@ $ adb devices  (lists all devices)
 `$ adb -d shell`  (concects with a connected __physical device__)
 
 - If device is not "rooted" we connect as normal user
-- Android Emulator is always "rooted"
+- Android Emulator is always "rooted" (APIs < 25)
 
 
+---
+
+## Log as root Emulator API 25
+
+- only for debug builds (emulator)
+
+```
+$ adb kill-server
+$ adb start-server
+$ adb root
+$ adb shell
+```
 ---
 
 ## Init sesion on non-rooted phones
