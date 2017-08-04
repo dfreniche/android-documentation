@@ -16,6 +16,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 - [Passing data back from one Activity: Open Activity for result](open-activity-forresult/openactivityforresult.md)
 - [Using the Realm database in Android](realm/realm.md)
 - [Intent Services](intent-service/intent-service.md)
+- [Permissions in Android API >= 23 (Android N)](permissions-android-n/permissions-android-n.md)
 
 ## Contributing
 
