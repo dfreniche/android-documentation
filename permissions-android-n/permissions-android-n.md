@@ -63,3 +63,56 @@ public void onRequestPermissionsResult(int requestCode, String[] permissions, in
   }
 }
 ```
+
+---
+
+## If user taps in Don't ask me again?
+
+```java
+ @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
+          grantResults) {
+    switch (requestCode) {
+      case REQUEST_CODE_EXTERNAL_STORAGE:
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          boolean showRationale = shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE);
+          if (showRationale) {
+            // user didn't check "never ask again"
+          } else {
+            // user did check "never ask again"
+
+            // show a dialog, send to this app Settings
+            // this methis is in next slide
+            startInstalledAppDetailsActivity(MyActivity.this);
+          }
+        }
+        break;
+      default:
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        break;
+    }
+  }
+```
+
+---
+
+## If user taps in Don't ask me again?
+
+
+```java
+public static void startInstalledAppDetailsActivity(final Activity context) {
+  if (context == null) {
+    return;
+  }
+  final Intent i = new Intent();
+  i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+  i.addCategory(Intent.CATEGORY_DEFAULT);
+  i.setData(Uri.parse("package:" + context.getPackageName()));
+  i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+  i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+  context.startActivity(i);
+}
+
+
+```
