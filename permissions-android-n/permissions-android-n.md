@@ -18,6 +18,16 @@ footer: (c) Diego Freniche / @dfreniche / www.freniche.com
 ## Android version >= N
 
 1. We still __need__ to put the `uses-permission` line
+1. If the permission we need is normal, no more code is needed.
+https://developer.android.com/guide/topics/permissions/normal-permissions.html
+
+For instance `ACCESS_WIFI_STATE` is normal.
+
+---
+
+## Android version >= N
+
+1. __If asking for a dangerous permission__
 1. We ask the user for permission programmatically
   - using `checkSelfPermission`
 1. we get response from user's action
