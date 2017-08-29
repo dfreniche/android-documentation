@@ -245,6 +245,12 @@ realm.executeTransaction(new Realm.Transaction() {
 
 ---
 
+## Transactions
+
+- with success, error completion closures
+
+---
+
 ## Auto-updating data
 
 Auto-Updating Objects
@@ -347,9 +353,72 @@ Although Realm files can be accessed by multiple threads concurrently, you canno
 
 ---
 
+## Migrations (1)
+
+- reference: https://realm.io/docs/java/latest/#migrations
+- to perform a migration we need to 1st create a custom config:
+    - with new version number
+    - with a Migration instance object to perform the actual migration
+
+```java 
+RealmConfiguration config = new RealmConfiguration.Builder()
+    .schemaVersion(2) // Must be bumped when the schema changes
+    .migration(new MyMigration()) // Migration to run instead of throwing an exception
+    .build()
+```
+
+---
+
+## Migrations (2)
+
+```java
+RealmMigration migration = new RealmMigration() {
+    @Override
+    public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
+        RealmSchema schema = realm.getSchema();
+
+        if (oldVersion == 0) {
+            schema.create("FoodCategory")
+                .addField("title", String.class, FieldAttribute.REQUIRED)
+                .addField("subtitle", String.class, FieldAttribute.REQUIRED)
+                .addField("reason", String.class, FieldAttribute.REQUIRED)
+                .addField("postId", String.class, FieldAttribute.REQUIRED)
+                .addField("isItOK", boolean.class)
+                .addField("order", int.class);
+            oldVersion++;
+        }
+
+        if (oldVersion == 1) {
+            // do things
+            oldVersion++;
+        }
+    }
+};
+```
+
+---
+
+## Migrations (3)
+
+- new class added in Migration
+
+```java
+public class FoodCategory extends RealmObject {
+    @Required public String title;
+    @Required public String subtitle;
+    @Required public String reason;
+    @Required public String postId;
+    public boolean isItOK;
+    public int order;
+}
+```
+
+---
+
 ## Realm browser
 
 - tool to inspect Realm database files 
+- can't create new "tables"
 
 http://stackoverflow.com/questions/28478987/how-to-view-my-realm-file-in-the-realm-browser
 
@@ -372,6 +441,60 @@ adb pull /data/data/com.freniche.realmhelloworld/files/ .
 # for devices running an android version equal or grater than lollipop
 adb exec-out run-as com.freniche.realmhelloworld cat files/ > files
 adb shell "run-as com.freniche.realmhelloworld chmod 600 /data/data/com.freniche.realmhelloworld/files/"
+```
+
+---
+
+## Copy pre-populated Realm DB to App
+
+```java
+private void copyRealmDBFileToAppDataFolder() {
+        // delete file if exists
+        final File oldRealmFile = new File(getFilesDir(), Realm.DEFAULT_REALM_NAME);
+        if (oldRealmFile.exists()) {
+            final Runnable errorDeleting = new Runnable() {
+                @Override
+                public void run() {
+                    Bugfender.sendIssue("Delete old database", "Delete old database error");
+                }
+            };
+
+            try {
+                boolean deleted = oldRealmFile.delete();
+                if (!deleted) {
+                    errorDeleting.run();
+                }
+            } catch (RuntimeException e) {
+                errorDeleting.run();
+            }
+        }
+
+        // Make sure source pre-populated DB exists
+        final File realmFile = new File(getFilesDir(), "newdb.realm");
+
+        if (!realmFile.exists()) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = getAssets().open("databases/newdb.realm");
+                out = new FileOutputStream(realmFile);
+                copyFile(in, out);
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + realmFile, e);
+            } finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException ignored) { }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException ignored) { }
+                }
+            }
+        }
+    }
 ```
 
 ---
