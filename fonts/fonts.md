@@ -35,6 +35,7 @@ http://stackoverflow.com/a/5583782/225503
 
 - add this class to your project
 - this works with `android.widget.TextView` and all TextView subclasses: `AppCompatTextView, Button, CheckedTextView, Chronometer, DigitalClock, EditText, RowHeaderView, TextClock, ...`
+- code from [this SO answer](http://stackoverflow.com/questions/2888508/how-to-change-the-font-on-the-textview), improved a little
 
 ```java
 import android.content.Context;

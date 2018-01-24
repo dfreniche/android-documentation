@@ -17,6 +17,7 @@ These docs are in Markdown format, prepared to be used with the superb presentat
 - [Using the Realm database in Android](realm/realm.md)
 - [Intent Services](intent-service/intent-service.md)
 - [Permissions in Android API >= 23 (Android N)](permissions-android-n/permissions-android-n.md)
+- [Multidex Apps](multidex/multidex-64klimit.md)
 
 ## Contributing
 
